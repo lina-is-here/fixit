@@ -1,4 +1,4 @@
-#!.conftest_pk/bin/python
+#!.contest_venv/bin/python
 import sys
 
 from consolemenu import *
