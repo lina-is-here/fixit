@@ -6,18 +6,30 @@ from consolemenu.format import *
 from consolemenu.items import *
 import ruamel.yaml
 
-def contest_action():
+
+def yamls():
     yaml = ruamel.yaml.YAML() 
     yaml.indent(sequence=4, offset=2)
     input_file="./tasks_definition.yaml"
     with open(input_file, 'r') as f:
         data = f.read()
-    # import pdb; pdb.set_trace()
     x = yaml.load(data)
-    # print("HELOOOOOOOOO {}".format(x.dump()))
-    Screen().input(x)
+    return x
+
+
+def use_hint(deduction, hint):
+    with open('volume/score', 'r+') as f:
+        score = f.read()
+        new_score = int(score) - deduction
+        f.seek(0)
+        f.write(str(new_score))
+        f.truncate()
+        Screen.println(hint)
+        Screen().input('So, your current score is {}'.format(new_score))
+
 
 def main():
+    data = yamls()
     # Change some menu formatting
     menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
         .set_prompt("SELECT>") \
@@ -28,22 +40,31 @@ def main():
         .show_header_bottom_border(True)
 
     # menu = ConsoleMenu("Root Menu", "This is the Root Menu Subtitle", formatter=menu_format)
-    menu = ConsoleMenu("Menu", "This Time with Double-Line Borders.",
-                               prologue_text="This is my prologue. I am currently showing my top and bottom borders, but \
-they are hidden by default. Also notice that my text is really long, so it extends beyond a single line, and should \
-wrap properly within the menu borders. This is a useful place to put instructions to the user about how to use \
-the menu. sasa s s asasasasasasasasasssssssssssssssssssssssssssssssssssssas as asssassasasaaaaaaaaaaaaaaa\
-sa sas as s as as s\
-sas a as a sa sa\
-sa s s ",
-                               epilogue_text="This is my epilogue. My borders are currently hidden.",
+    menu = ConsoleMenu("Menu", "Fixit game",
+                               prologue_text="Welcome to the story! You need to fix a lot of stuff today...  \n Let's begin?",
+                               epilogue_text="Good luck",
                                formatter=MenuFormatBuilder()
                                .set_title_align('center')
                                .set_subtitle_align('center')
                                .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER)
                                .show_prologue_top_border(True)
                                .show_prologue_bottom_border(True))
-    item1 = MenuItem("Item 1", menu)
+
+    container_task_description = ConsoleMenu("1. Container task", "The fancy name of the container task.",
+                            prologue_text="Steps to achieve the result.",
+                            epilogue_text="Good luck with containers.",
+                            formatter=MenuFormatBuilder()
+                            .set_title_align('center')
+                            .set_subtitle_align('center')
+                            .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER)
+                            .show_prologue_top_border(True)
+                            .show_prologue_bottom_border(True))
+    container_hint1_points = data['task1']['hints']['hint1']['points']
+    container_hint1_description = data['task1']['hints']['hint1']['description']
+    container_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(container_hint1_points, container_hint1_description))
+    container_task_description.append_item(container_task_hint1)
+
+    container_task = SubmenuItem("Docker task", submenu=container_task_description)
 
     # Create a menu item that calls a function
     function_item = FunctionItem("Fun item", Screen().input, kwargs={"prompt": "Enter an input: "})
@@ -72,7 +93,7 @@ sa s s ",
                             formatter=submenu_formatter)
     # function_item_2 = FunctionItem("Fun item", Screen().input, ["Enter an input: "])
 
-    function_item_2 = FunctionItem("TESTTTT", contest_action)
+    function_item_2 = FunctionItem("TESTTTT", yamls)
 
     item2 = MenuItem("Another Item")
     submenu_2.append_item(function_item_2)
@@ -101,7 +122,7 @@ the menu.",
     submenu_item_3.set_menu(menu)
 
     # Add all the items to the root menu
-    menu.append_item(item1)
+    menu.append_item(container_task)
     menu.append_item(function_item)
     menu.append_item(command_item)
     menu.append_item(submenu_item)
