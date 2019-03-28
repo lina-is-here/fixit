@@ -50,6 +50,7 @@ def main():
                                .show_prologue_top_border(True)
                                .show_prologue_bottom_border(True))
 
+    # description of the first (container) menu item
     container_task_description = ConsoleMenu("1. Container task", "The fancy name of the container task.",
                             prologue_text="Steps to achieve the result.",
                             epilogue_text="Good luck with containers.",
@@ -59,22 +60,67 @@ def main():
                             .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER)
                             .show_prologue_top_border(True)
                             .show_prologue_bottom_border(True))
+    container_start = CommandItem("Start",
+                               'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_normal"\'')
     container_hint1_points = data['task1']['hints']['hint1']['points']
     container_hint1_description = data['task1']['hints']['hint1']['description']
     container_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(container_hint1_points, container_hint1_description))
+    container_task_description.append_item(container_start)
     container_task_description.append_item(container_task_hint1)
 
     container_task = SubmenuItem("Docker task", submenu=container_task_description)
 
+    # description of the second task (connect to the deployed container)
+    connect_task_description = ConsoleMenu("2. Connect to the container",
+                                             "The fancy name of the connect to the deployed container task.",
+                                             prologue_text="Steps to achieve the result.",
+                                             epilogue_text="Good luck with containers.",
+                                             formatter=MenuFormatBuilder()
+                                             .set_title_align('center')
+                                             .set_subtitle_align('center')
+                                             .set_border_style_type(
+                                                 MenuBorderStyleType.DOUBLE_LINE_BORDER)
+                                             .show_prologue_top_border(True)
+                                             .show_prologue_bottom_border(True))
+    connect_start = CommandItem("Start",
+                                  'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_normal"\'')
+    connect_hint1_points = data['task2']['hints']['hint1']['points']
+    connect_hint1_description = data['task2']['hints']['hint1']['description']
+    connect_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(connect_hint1_points,
+                                                                   connect_hint1_description))
+    connect_task_description.append_item(connect_start)
+    connect_task_description.append_item(connect_task_hint1)
+
+    connect_task = SubmenuItem("Connect to the container task", submenu=connect_task_description)
+
+    # description of the third task (download the task)
+    get_task_description = ConsoleMenu("3. Get the task",
+                                             "The fancy name of the getting the task.",
+                                             prologue_text="Steps to achieve the result.",
+                                             epilogue_text="Good luck with this.",
+                                             formatter=MenuFormatBuilder()
+                                             .set_title_align('center')
+                                             .set_subtitle_align('center')
+                                             .set_border_style_type(
+                                                 MenuBorderStyleType.DOUBLE_LINE_BORDER)
+                                             .show_prologue_top_border(True)
+                                             .show_prologue_bottom_border(True))
+    get_task_start = CommandItem("Start",
+                                  'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_normal"\'')
+    # get_task_hint1_points = data['task2']['hints']['hint1']['points']
+    # get_task_hint1_description = data['task2']['hints']['hint1']['description']
+    # get_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(connect_hint1_points,
+    #                                                                connect_hint1_description))
+    get_task_description.append_item(get_task_start)
+    # get_task_description.append_item(connect_task_hint1)
+
+    get_task = SubmenuItem("Get the task", submenu=get_task_description)
+
     # Create a menu item that calls a function
     function_item = FunctionItem("Fun item", Screen().input, kwargs={"prompt": "Enter an input: "})
 
-    # Create a menu item that calls a system command, based on OS type
-    if sys.platform.startswith('win'):
-        command_item = CommandItem("Command", 'cmd /c \"echo this is a shell. Press enter to continue." && set /p=\"')
-    else:
-        # command_item = CommandItem("Command", 'sh -c \'echo "this is a shell. Press enter to continue."; read\'')
-        command_item = CommandItem("Run game", 'sh -c \'tmux split-window  "bash --rcfile .bashrc_pk"\'')
+    # Create a menu item that calls a system command
+    command_item = CommandItem("Run game", 'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_task5"\'')
 
     # Create a submenu using a Selection Menu, which takes a list of strings to create the menu items. This
     # submenu is passed the same formatter object, to keep its formatting consistent.
@@ -123,6 +169,8 @@ the menu.",
 
     # Add all the items to the root menu
     menu.append_item(container_task)
+    menu.append_item(connect_task)
+    menu.append_item(get_task)
     menu.append_item(function_item)
     menu.append_item(command_item)
     menu.append_item(submenu_item)
