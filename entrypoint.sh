@@ -11,6 +11,6 @@ elif [ -z ${OC_TOKEN} ]; then
   exit 1
 fi
 
-
+export PYTHONIOENCODING=utf8
 source /home/contest/fixit/.contest_venv/bin/activate
 tmux new-session -s my "python contest"
