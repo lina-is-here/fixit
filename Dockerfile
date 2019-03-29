@@ -8,7 +8,7 @@ RUN pip install -U virtualenv
 RUN pip install pacman-game
 
 ADD entrypoint.sh /usr/local/bin
-ADD detect_passed.sh /usr/local/bin
+COPY detect_passed /usr/local/bin
 
 RUN adduser contest
 USER contest
