@@ -10,5 +10,5 @@ fi
 
 # User specific aliases and functions
 export TTT=1
-source .conftest_pk/bin/activate
+source /home/contest/fixit/.contest_venv/bin/activate
 pacman-game
