@@ -24,3 +24,45 @@ task2:
         hint3:
             points: 6
             description: you must be clever task2
+
+task3:
+    name: Download the task
+    description: bla bla bla task3
+    hints:
+        hint1:
+            points: 1
+            description: you have to do first this task3
+        hint2:
+            points: 4
+            description: you must be stupid task3
+        hint3:
+            points: 6
+            description: you must be clever task3
+
+task4:
+    name: Open the archive
+    description: bla bla bla task4
+    hints:
+        hint1:
+            points: 1
+            description: you have to do first this task4
+        hint2:
+            points: 4
+            description: you must be stupid task4
+        hint3:
+            points: 6
+            description: you must be clever task4
+
+task5:
+    name: Run the tests
+    description: bla bla bla task5
+    hints:
+        hint1:
+            points: 1
+            description: you have to do first this task5
+        hint2:
+            points: 4
+            description: you must be stupid task5
+        hint3:
+            points: 6
+            description: you must be clever task5
