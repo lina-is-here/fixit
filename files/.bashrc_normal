@@ -10,4 +10,5 @@ fi
 
 # User specific aliases and functions
 export TTT=1
+alias pytest='/usr/local/bin/detect_passed'
 source /home/contest/fixit/.contest_venv/bin/activate
