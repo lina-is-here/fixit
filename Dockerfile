@@ -5,6 +5,7 @@ RUN yum -y install git python-pip gcc python-setuptools tmux && \
 
 RUN easy_install pip
 RUN pip install -U virtualenv
+RUN pip install pacman-game
 
 ADD entrypoint.sh /usr/local/bin
 
