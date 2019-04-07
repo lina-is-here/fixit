@@ -8,9 +8,9 @@ import ruamel.yaml
 
 
 def yamls():
-    yaml = ruamel.yaml.YAML() 
+    yaml = ruamel.yaml.YAML()
     yaml.indent(sequence=4, offset=2)
-    input_file="./tasks_definition.yaml"
+    input_file = "./tasks_definition.yaml"
     with open(input_file, 'r') as f:
         data = f.read()
     x = yaml.load(data)
@@ -31,11 +31,11 @@ def use_hint(deduction, hint):
 def main():
     data = yamls()
     # Change some menu formatting
-    task_menu_format = MenuFormatBuilder()\
-        .set_title_align('center')\
-        .set_subtitle_align('center')\
-        .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER)\
-        .show_prologue_top_border(True)\
+    task_menu_format = MenuFormatBuilder() \
+        .set_title_align('center') \
+        .set_subtitle_align('center') \
+        .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER) \
+        .show_prologue_top_border(True) \
         .show_prologue_bottom_border(True)
 
     menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
@@ -48,23 +48,24 @@ def main():
 
     # menu = ConsoleMenu("Root Menu", "This is the Root Menu Subtitle", formatter=menu_format)
     menu = ConsoleMenu("Menu", "Fixit game",
-                               prologue_text="Welcome to the story! You need to fix a lot of stuff today...  \n Let's begin?",
-                               epilogue_text="Good luck",
-                               formatter=task_menu_format)
+                       prologue_text=data['main_description'],
+                       epilogue_text="Good luck",
+                       formatter=task_menu_format)
 
     # just split the window
     normal_start = CommandItem("Start",
-                                  'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_normal"\'')
+                               'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_normal"\'')
 
     # description of the first (container) menu item
     container_task_description = ConsoleMenu(data['task1']['name'],
                                              prologue_text=data['task1']['description'],
-                                             epilogue_text="Good luck with containers.",
+                                             epilogue_text=data['exit'],
                                              formatter=task_menu_format)
 
     container_hint1_points = data['task1']['hints']['hint1']['points']
     container_hint1_description = data['task1']['hints']['hint1']['description']
-    container_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(container_hint1_points, container_hint1_description))
+    container_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(container_hint1_points,
+                                                                   container_hint1_description))
     container_task_description.append_item(normal_start)
     container_task_description.append_item(container_task_hint1)
 
@@ -73,13 +74,13 @@ def main():
     # description of the second task (connect to the deployed container)
     connect_task_description = ConsoleMenu(data['task2']['name'],
                                            prologue_text=data['task2']['description'],
-                                           epilogue_text="Good luck with containers.",
+                                           epilogue_text=data['exit'],
                                            formatter=task_menu_format)
 
     connect_hint1_points = data['task2']['hints']['hint1']['points']
     connect_hint1_description = data['task2']['hints']['hint1']['description']
     connect_task_hint1 = FunctionItem("Hint 1", lambda: use_hint(connect_hint1_points,
-                                                                   connect_hint1_description))
+                                                                 connect_hint1_description))
     connect_task_description.append_item(normal_start)
     connect_task_description.append_item(connect_task_hint1)
 
@@ -87,9 +88,9 @@ def main():
 
     # description of the third task (download the task)
     get_task_description = ConsoleMenu(data['task3']['name'],
-                                             prologue_text=data['task3']['description'],
-                                             epilogue_text="Good luck with this.",
-                                             formatter=task_menu_format)
+                                       prologue_text=data['task3']['description'],
+                                       epilogue_text=data['exit'],
+                                       formatter=task_menu_format)
 
     # get_task_hint1_points = data['task2']['hints']['hint1']['points']
     # get_task_hint1_description = data['task2']['hints']['hint1']['description']
@@ -104,7 +105,8 @@ def main():
     function_item = FunctionItem("Fun item", Screen().input, kwargs={"prompt": "Enter an input: "})
 
     # Create a menu item that calls a system command
-    command_item = CommandItem("Run game", 'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_task5"\'')
+    command_item = CommandItem("Run game",
+                               'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_task5"\'')
 
     # Create a submenu using a Selection Menu, which takes a list of strings to create the menu items. This
     # submenu is passed the same formatter object, to keep its formatting consistent.
@@ -121,7 +123,6 @@ def main():
     # Create a second submenu, but this time use a standard ConsoleMenu instance, and use the submenu_formatter.
     submenu_2 = ConsoleMenu("Another Submenu Title", "Submenu subtitle. Notice this menu is ASCII.",
                             formatter=submenu_formatter)
-    # function_item_2 = FunctionItem("Fun item", Screen().input, ["Enter an input: "])
 
     function_item_2 = FunctionItem("TESTTTT", yamls)
 
@@ -155,11 +156,8 @@ the menu.",
     menu.append_item(container_task)
     menu.append_item(connect_task)
     menu.append_item(get_task)
-    menu.append_item(function_item)
-    menu.append_item(command_item)
-    menu.append_item(submenu_item)
-    menu.append_item(submenu_item_2)
-    menu.append_item(submenu_item_3)
+    # menu.append_item(unpack_archive)
+    # menu.append_item(run_the_tests)
 
     # Show the menu
     menu.start()
@@ -168,4 +166,3 @@ the menu.",
 
 if __name__ == "__main__":
     main()
-
