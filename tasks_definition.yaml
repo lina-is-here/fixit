@@ -71,7 +71,8 @@ task5:
     description: |
         The ghosts are back!
         Damn, you just woke up and need to fight for your food?
-        Luckily, there's a special magic script to help you out and check there're no ghosts around.
+        Luckily, there's a special magic script that was inside your yummy food to help you out and
+        check there're no ghosts around.
         Run "pytest script.py" and get all the tests passed to run away from the ghosts.
     hints:
         hint1:
