@@ -86,5 +86,5 @@ task5:
         hint4:
             points: 10
             description: |
-            Fix the type in the line of ghost creation. "ghosts_number" should
-            be "str(ghosts_number)"
+                Fix the type in the line of ghost creation. "ghosts_number"
+                should be "str(ghosts_number)"
