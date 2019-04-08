@@ -5,13 +5,13 @@ main_description: |
     You can't! Your don't feel your legs! You try to reach to your phone and call you friends.
     You can't! Reflection in the mirror tells you that you are some weird round and yellow creature.
     What's the ...
-exit: Press Ctrl+d when you finished the task
+exit: Press Ctrl+d when you finished the task and exit to the main menu
 task1:
     name: Let's begin
     description: Deploy centos container to Openshift platform
     hints:
         hint1:
-            points: 1
+            points: 2
             description: you have to do first this task1
         hint2:
             points: 4
@@ -22,7 +22,7 @@ task2:
     description: bla bla bla task2
     hints:
         hint1:
-            points: 1
+            points: 2
             description: you have to do first this task2
         hint2:
             points: 4
@@ -41,7 +41,7 @@ task3:
         "The food is there: https://github.com/lina-nikiforova/fixit/raw/master/food/yummy"
     hints:
         hint1:
-            points: 1
+            points: 2
             description: You need to download the food
         hint2:
             points: 4
@@ -57,7 +57,7 @@ task4:
         Open it!
     hints:
         hint1:
-            points: 1
+            points: 2
             description: You can check the type of the food by doing "file <name>"
         hint2:
             points: 4
@@ -75,7 +75,7 @@ task5:
         Run "pytest script.py" and get all the tests passed to run away from the ghosts.
     hints:
         hint1:
-            points: 1
+            points: 2
             description: If something is missing, you need to install it
         hint2:
             points: 4
