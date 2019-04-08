@@ -111,11 +111,45 @@ def main():
 
     get_task = SubmenuItem(data['task3']['name'], submenu=get_task_description)
 
+    # description of the fourth task (download the task)
+    unpack_archive_description = ConsoleMenu(data['task4']['name'],
+                                             prologue_text=data['task4']['description'],
+                                             epilogue_text=data['exit'],
+                                             formatter=task_menu_format)
+
+    # hint 1
+    unpack_archive_hint1_points = data['task4']['hints']['hint1']['points']
+    unpack_archive_hint1_description = data['task4']['hints']['hint1']['description']
+    unpack_archive_hint1 = FunctionItem(
+        "Hint 1, the cost is {} points".format(unpack_archive_hint1_points),
+        lambda: use_hint(unpack_archive_hint1_points,
+                         unpack_archive_hint1_description))
+    # hint 2
+    unpack_archive_hint2_points = data['task4']['hints']['hint2']['points']
+    unpack_archive_hint2_description = data['task4']['hints']['hint2']['description']
+    unpack_archive_hint2 = FunctionItem(
+        "Hint 2, the cost is {} points".format(unpack_archive_hint2_points),
+        lambda: use_hint(unpack_archive_hint2_points,
+                         unpack_archive_hint2_description))
+    # hint 3
+    unpack_archive_hint3_points = data['task4']['hints']['hint3']['points']
+    unpack_archive_hint3_description = data['task4']['hints']['hint3']['description']
+    unpack_archive_hint3 = FunctionItem(
+        "Hint 3, the cost is {} points".format(unpack_archive_hint3_points),
+        lambda: use_hint(unpack_archive_hint3_points,
+                         unpack_archive_hint3_description))
+    unpack_archive_description.append_item(normal_start)
+    unpack_archive_description.append_item(unpack_archive_hint1)
+    unpack_archive_description.append_item(unpack_archive_hint2)
+    unpack_archive_description.append_item(unpack_archive_hint3)
+
+    unpack_archive = SubmenuItem(data['task4']['name'], submenu=unpack_archive_description)
+
     # Root menu
     menu.append_item(container_task)
     menu.append_item(connect_task)
     menu.append_item(get_task)
-    # menu.append_item(unpack_archive)
+    menu.append_item(unpack_archive)
     # menu.append_item(run_the_tests)
 
     # Show the menu
