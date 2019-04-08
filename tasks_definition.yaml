@@ -45,10 +45,10 @@ task3:
             description: You need to download the food
         hint2:
             points: 4
-            description: You can use wget to get the files
+            description: You can use curl or wget to get the files
         hint3:
-            points: 6
-            description: wget https://github.com/lina-nikiforova/fixit/raw/master/food/yummy
+            points: 10
+            description: curl -Ok  https://raw.githubusercontent.com/lina-nikiforova/fixit/master/food/yummy
 
 task4:
     name: Open the food
@@ -63,7 +63,7 @@ task4:
             points: 4
             description: The food is an archive, you need to unpack it
         hint3:
-            points: 6
+            points: 10
             description: tar xzf yummy
 
 task5:
@@ -78,13 +78,13 @@ task5:
             points: 2
             description: If something is missing, you need to install it
         hint2:
-            points: 4
+            points: 8
             description: pip install pytest
         hint3:
-            points: 6
+            points: 16
             description: Pay attention to the traceback, there should be the same type
         hint4:
-            points: 10
+            points: 25
             description: |
                 Fix the type in the line of ghost creation. "ghosts_number"
                 should be "str(ghosts_number)"
