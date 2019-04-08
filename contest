@@ -111,7 +111,7 @@ def main():
 
     get_task = SubmenuItem(data['task3']['name'], submenu=get_task_description)
 
-    # description of the fourth task (download the task)
+    # description of the fourth task (unpack the archive)
     unpack_archive_description = ConsoleMenu(data['task4']['name'],
                                              prologue_text=data['task4']['description'],
                                              epilogue_text=data['exit'],
@@ -145,12 +145,54 @@ def main():
 
     unpack_archive = SubmenuItem(data['task4']['name'], submenu=unpack_archive_description)
 
+    # description of the fifth task (running tests)
+    run_the_tests_description = ConsoleMenu(data['task5']['name'],
+                                            prologue_text=data['task5']['description'],
+                                            epilogue_text=data['exit'],
+                                            formatter=task_menu_format)
+
+    # hint 1
+    run_the_tests_hint1_points = data['task5']['hints']['hint1']['points']
+    run_the_tests_hint1_description = data['task5']['hints']['hint1']['description']
+    run_the_tests_hint1 = FunctionItem(
+        "Hint 1, the cost is {} points".format(run_the_tests_hint1_points),
+        lambda: use_hint(run_the_tests_hint1_points,
+                         run_the_tests_hint1_description))
+    # hint 2
+    run_the_tests_hint2_points = data['task5']['hints']['hint2']['points']
+    run_the_tests_hint2_description = data['task5']['hints']['hint2']['description']
+    run_the_tests_hint2 = FunctionItem(
+        "Hint 2, the cost is {} points".format(run_the_tests_hint2_points),
+        lambda: use_hint(run_the_tests_hint2_points,
+                         run_the_tests_hint2_description))
+    # hint 3
+    run_the_tests_hint3_points = data['task5']['hints']['hint3']['points']
+    run_the_tests_hint3_description = data['task5']['hints']['hint3']['description']
+    run_the_tests_hint3 = FunctionItem(
+        "Hint 3, the cost is {} points".format(run_the_tests_hint3_points),
+        lambda: use_hint(run_the_tests_hint3_points,
+                         run_the_tests_hint3_description))
+    # hint 4
+    run_the_tests_hint4_points = data['task5']['hints']['hint4']['points']
+    run_the_tests_hint4_description = data['task5']['hints']['hint4']['description']
+    run_the_tests_hint4 = FunctionItem(
+        "Hint 4, the cost is {} points".format(run_the_tests_hint3_points),
+        lambda: use_hint(run_the_tests_hint4_points,
+                         run_the_tests_hint4_description))
+    run_the_tests_description.append_item(normal_start)
+    run_the_tests_description.append_item(run_the_tests_hint1)
+    run_the_tests_description.append_item(run_the_tests_hint2)
+    run_the_tests_description.append_item(run_the_tests_hint3)
+    run_the_tests_description.append_item(run_the_tests_hint4)
+
+    run_the_tests = SubmenuItem(data['task5']['name'], submenu=run_the_tests_description)
+
     # Root menu
     menu.append_item(container_task)
     menu.append_item(connect_task)
     menu.append_item(get_task)
     menu.append_item(unpack_archive)
-    # menu.append_item(run_the_tests)
+    menu.append_item(run_the_tests)
 
     # Show the menu
     menu.start()
