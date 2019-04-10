@@ -10,6 +10,6 @@ ADD entrypoint.sh /usr/local/bin
 
 USER contestoc
 
-ADD .bashrc /home/contestc
+ADD .bashrc /home/contestoc
 
 ENTRYPOINT ["entrypoint.sh"]
