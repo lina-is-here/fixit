@@ -2,11 +2,11 @@ FROM centos:latest
 
 USER root
 
-ENV test_var=1
-
-RUN yum -y install nano vim file man-db wget
+RUN yum -y install nano vim file man-db wget nss_wrapper gettext
 
 ADD entrypoint.sh /usr/local/bin
+
+ADD passwd.template /tmp/
 
 RUN useradd -ms /bin/bash contestoc
 
