@@ -7,7 +7,7 @@ USER root
 
 RUN PACKAGES="nano vim file man-db wget nss_wrapper gettext epel-release" && \
     yum install -y centos-release-scl && \
-    yum install -y --setopt=tsflags=nodocs --enablerepo=centosplus $PACKAGES && \
+    yum install -y --enablerepo=centosplus $PACKAGES && \
     rpm -V $PACKAGES && \
     yum clean all -y
 
