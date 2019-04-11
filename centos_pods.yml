@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos7-fixit-pod-1
+  labels:
+      name: centos7-fixit-pod-1
+spec:
+  containers:
+  - name: centos7-fixit-1
+    image: anikiforova/fixit:centos
+    imagePullPolicy: Always
+    command: [ "yes" ]
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        cpu: "10m"
+        memory: "100Mi"
+restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos7-fixit-pod-2
+  labels:
+      name: centos7-fixit-pod-2
+spec:
+  containers:
+  - name: centos7-fixit-2
+    image: anikiforova/fixit:centos
+    imagePullPolicy: Always
+    command: [ "yes" ]
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        cpu: "10m"
+        memory: "100Mi"
+restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos7-fixit-pod-3
+  labels:
+      name: centos7-fixit-pod-3
+spec:
+  containers:
+  - name: centos7-fixit-3
+    image: anikiforova/fixit:centos
+    imagePullPolicy: Always
+    command: [ "yes" ]
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        cpu: "10m"
+        memory: "100Mi"
+restartPolicy: Never

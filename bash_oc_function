@@ -1,0 +1,14 @@
+oc () {
+	OC=$(whereis oc | awk -F ": " '{print $2}')
+	if [ -n "$OC" ]
+	then
+		if [ "$1" = "rsh" ]
+		then
+			$OC rsh --shell='/bin/bash' ${@:2}
+		else
+			$OC $@
+		fi
+	else
+		echo 'Openshift sdk not installed!!!' > /tmp/1
+	fi
+}
