@@ -5,7 +5,7 @@ USER root
 # RUN  curl -o http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
 #      rpm -ivh epel-release-latest-7.noarch.rpm
 
-RUN PACKAGES="nano vim file man-db wget nss_wrapper gettext epel-release" && \
+RUN PACKAGES="nano vim-enhanced file man-db wget nss_wrapper gettext epel-release" && \
     yum install -y centos-release-scl && \
     yum install -y --enablerepo=centosplus $PACKAGES && \
     rpm -V $PACKAGES && \
