@@ -8,8 +8,10 @@ RUN yum -y install nano vim file man-db wget
 
 ADD entrypoint.sh /usr/local/bin
 
+RUN useradd -ms /bin/bash contestoc
+
 USER contestoc
 
-ADD .bashrc /home/contestoc
+ADD .bashrc /home/contestoc/
 
 ENTRYPOINT ["entrypoint.sh"]
