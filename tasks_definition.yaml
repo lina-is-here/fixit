@@ -5,7 +5,12 @@ main_description: |
     You can't! Your don't feel your legs! You try to reach to your phone and call you friends.
     You can't! Reflection in the mirror tells you that you are some weird round and yellow creature.
     What's the ...
-exit: Press Ctrl+d when you finished the task and exit to the main menu
+exit: Good luck!
+task0:
+    name: First things first
+    description: Provide some information before you start
+    inputs:
+        name: What's your name and email?
 task1:
     name: Let's begin
     description: |

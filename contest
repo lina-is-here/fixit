@@ -1,10 +1,16 @@
 #!.contest_venv/bin/python
-import sys
+import datetime
+import os
 
 from consolemenu import *
 from consolemenu.format import *
 from consolemenu.items import *
 import ruamel.yaml
+from slugify import slugify
+
+
+# global definition of the score file for the player
+filename = 'tmp'
 
 
 def yamls():
@@ -18,14 +24,33 @@ def yamls():
 
 
 def use_hint(deduction, hint):
-    with open('volume/score', 'r+') as f:
-        score = f.read()
-        new_score = int(score) - deduction
-        f.seek(0)
-        f.write(str(new_score))
-        f.truncate()
-        Screen.println(hint)
-        Screen().input('So, your current score is {}'.format(new_score))
+    global filename
+    if os.path.isfile(filename):
+        with open(filename, 'r+') as f:
+            score = f.read()
+            new_score = int(score) - deduction
+            f.seek(0)
+            f.write(str(new_score))
+            f.truncate()
+            Screen.println(hint)
+            Screen().input('So, your current score is {}'.format(new_score))
+    else:
+        Screen().input('Please provide your name and email first')
+
+
+def get_name_email():
+    data = yamls()
+    username_input = Screen().input(prompt="Enter your name: ")
+    email_input = Screen().input(prompt="Enter your email: ")
+
+    username = slugify(username_input.input_string)
+    email = email_input.input_string
+    current_time = datetime.datetime.now().time()
+    global filename
+    filename = 'volume/{}_{}_{}'.format(username, email, current_time)
+    total_points = str(data['total_points'])
+    with open(filename, 'w') as f:
+        f.write(total_points)
 
 
 def main():
@@ -46,6 +71,18 @@ def main():
     # just split the window
     normal_start = CommandItem("Start",
                                'sh -c \'tmux split-window  "bash --rcfile files/.bashrc_normal"\'')
+
+    # introduction
+    intro = ConsoleMenu(data['task0']['name'],
+                        prologue_text=data['task0']['description'],
+                        epilogue_text=data['exit'],
+                        formatter=task_menu_format)
+
+    intro_name = FunctionItem(data['task0']['inputs']['name'], get_name_email)
+
+    intro.append_item(intro_name)
+
+    intro_task = SubmenuItem(data['task0']['name'], submenu=intro)
 
     # description of the first (container) menu item
     container_task_description = ConsoleMenu(data['task1']['name'],
@@ -176,7 +213,7 @@ def main():
     run_the_tests_hint4_points = data['task5']['hints']['hint4']['points']
     run_the_tests_hint4_description = data['task5']['hints']['hint4']['description']
     run_the_tests_hint4 = FunctionItem(
-        "Hint 4, the cost is {} points".format(run_the_tests_hint3_points),
+        "Hint 4, the cost is {} points".format(run_the_tests_hint4_points),
         lambda: use_hint(run_the_tests_hint4_points,
                          run_the_tests_hint4_description))
     run_the_tests_description.append_item(normal_start)
@@ -188,6 +225,7 @@ def main():
     run_the_tests = SubmenuItem(data['task5']['name'], submenu=run_the_tests_description)
 
     # Root menu
+    menu.append_item(intro_task)
     menu.append_item(container_task)
     menu.append_item(connect_task)
     menu.append_item(get_task)
