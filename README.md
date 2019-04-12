@@ -3,8 +3,10 @@
 You need to pass 2 variables to container, OC_URL which suppose to point to your openshift cluster and OC_TOKEN which is actually password to access your Openshift environment.
 Example:
 ```
-docker run -e OC_URL=https://api.starter-us-east-1.openshift.com -e OC_TOKEN=qNmldCM_YHr3FDmjliuhzmyadGE30kTpQq12121 -it anikiforova/fixit
-```
+docker run -e OC_URL=https://api.starter-us-east-1.openshift.com \
+  -e OC_TOKEN=qNmldCM_YHr3FDmjliuhzmyadGE30kTpQq12121 \
+  -e OC_PROJECT=fixit{1..6} \
+  -it anikiforova/fixit
 
 
 

@@ -8,28 +8,49 @@ main_description: |
 exit: Press Ctrl+d when you finished the task and exit to the main menu
 task1:
     name: Let's begin
-    description: Deploy centos container to Openshift platform
+    description: |
+        Before you will eat something you recall...
+        Finish task from yesterday ...
+        Openshift - what it is ...
+        You created centos_pods.yml file yesterday after several beers.
+        oc apply -f ... --dry-run --validate
+        oc apply -f ...
+        oc delete -f ...
+        Because you have headache and you do not remember syntax of oc client tool, you must use -
+        `oc apply --help` and `oc delete --help`
     hints:
         hint1:
             points: 2
-            description: you have to do first this task1
+            description: |
+                Observe the file, there are 3 sections, it suppose to create 3 almost identical Openshift pods.
+                In each section there is one typo. Open editor vim or nano and fix those typos and save the file.
+                Once you think the file was fixed, run `oc apply -f centos_pods.yml --dry-run --validate` command,
+                it will tell you if there are more errors.
         hint2:
             points: 4
-            description: you must be stupid task1
+            description: |
+                If you somehow screw and you cannot deploy any of the Openshift pods, you can delete these resources by executing,
+                `oc delete -f centos_pods.yml` and re-deploy again with `oc apply -f centos_pods.yml`
 
 task2:
-    name: Connect to container
-    description: bla bla bla task2
+    name: Connect to POD
+    description: |
+        We need to get secret stuff from pods ...
+        oc get pods
+        oc rsh ...
+        Your head still hurts so you ask for mor help -
+        `oc rsh --help`
     hints:
         hint1:
             points: 2
-            description: you have to do first this task2
+            description: |
+                oc rsh <name of the pod>
         hint2:
             points: 4
-            description: you must be stupid task2
-        hint3:
-            points: 6
-            description: you must be clever task2
+            description: |
+                oc rsh centos7-fixit-pod-1
+                oc rsh centos7-fixit-pod-2
+                oc rsh centos7-fixit-pod-3
 
 task3:
     name: Get the food

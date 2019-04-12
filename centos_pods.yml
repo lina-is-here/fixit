@@ -5,7 +5,7 @@ metadata:
   name: centos7-fixit-pod-1
   labels:
       name: centos7-fixit-pod-1
-spec:
+spec1:
   containers:
   - name: centos7-fixit-1
     image: anikiforova/fixit:centos
@@ -28,7 +28,7 @@ metadata:
       name: centos7-fixit-pod-2
 spec:
   containers:
-  - name: centos7-fixit-2
+  - Name: centos7-fixit-2
     image: anikiforova/fixit:centos
     imagePullPolicy: Always
     command: [ "yes" ]
@@ -50,7 +50,7 @@ metadata:
 spec:
   containers:
   - name: centos7-fixit-3
-    image: anikiforova/fixit:centos
+    Simage: anikiforova/fixit:centos
     imagePullPolicy: Always
     command: [ "yes" ]
     resources:
