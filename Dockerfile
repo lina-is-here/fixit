@@ -29,6 +29,8 @@ RUN curl -L -O https://github.com/openshift/origin/releases/download/v3.11.0/ope
 
 ENV PATH=${PATH}:/home/contest/fixit/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit
 
+ADD .tmux.conf /home/contest/
+
 USER root
 RUN oc completion bash >> /etc/bash_completion.d/oc_completion && \
     cat /home/contest/fixit/bash_oc_function >> /home/contest/.bashrc
