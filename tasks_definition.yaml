@@ -81,6 +81,7 @@ task4:
     description: |
         The food is delivered and smells so good!
         Open it!
+        Remember the secret stuff you got from pods? You need it now.
     hints:
         hint1:
             points: 2
@@ -90,7 +91,7 @@ task4:
             description: The food is an archive, you need to unpack it
         hint3:
             points: 10
-            description: tar xzf yummy
+            description: unzip yummy
 
 task5:
     name: Run away!
