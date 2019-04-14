@@ -22,7 +22,10 @@ while read -r line; do
         sleep 1
         echo -e "${GREEN}1${NC}"
         sleep 1
+        echo -e "${GREEN}And here they are again!!!${NC}"
+        sleep 1
         clear
+        echo -e "${GREEN}Press ENTER to continue${NC}"
         fixed=true
     fi
 done < <(pytest $1)

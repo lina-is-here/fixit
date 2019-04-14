@@ -2,25 +2,30 @@
 total_points: 100
 main_description: |
     You wake up and try to get up. Something is very unusual...
-    You can't! Your don't feel your legs! You try to reach to your phone and call you friends.
-    You can't! Reflection in the mirror tells you that you are some weird round and yellow creature.
+    Was it too many beers last night? You feel like a different person.
+    Look in the mirror! What happend to you? Reflection in the mirror tells you that you are some weird round and yellow creature.
     What's the ...
 exit: Good luck!
 task0:
-    name: First things first
+    name: First Things First
     description: Provide some information before you start
     inputs:
         name: What's your name and email?
 task1:
-    name: Let's begin
+    name: A Pending Task
     description: |
-        Before you will eat something you recall...
-        Finish task from yesterday ...
-        Openshift - what it is ...
-        You created centos_pods.yml file yesterday after several beers.
+        You are still trying to remember what happened: it was just a regular Tuesday...
+        Tuesday? Oh God, it means today is Wednesday and you should go to work. You drop a message to your team: "Working from home today".
+        You open your laptop and see you forgot to finish a task yesterday (strange, you've never left tasks unfinished before).
+        So, you defintely worked on Openshift yesterday, huh, such a buzzword nowadays.
+        Ok, now you remember you created centos_pods.yml, so you need to finish and create this pods.
+
+        Create the pods using the following commands:
+
         oc apply -f ... --dry-run --validate
         oc apply -f ...
         oc delete -f ...
+
         Because you have headache and you do not remember syntax of oc client tool, you must use -
         `oc apply --help` and `oc delete --help`
     hints:
@@ -38,13 +43,24 @@ task1:
                 `oc delete -f centos_pods.yml` and re-deploy again with `oc apply -f centos_pods.yml`
 
 task2:
-    name: Connect to POD
+    name: Getting the Secret
     description: |
-        We need to get secret stuff from pods ...
+        A lot of questions but at least you finished the pending task. Your manager pings you on the chat:
+        - hey, here?
+        - yep
+        - thanks for the deploying the pods
+        - np
+        - we heard there's some secret stuff in one of the pods, can you check?
+        - sure...
+
+        What kind of secret stuff? But as you want a promotion soon, you are really determined to explore it.
+        You remember yesterday one colleague told you some useful commands:
         oc get pods
         oc rsh ...
         Your head still hurts so you ask for mor help -
         `oc rsh --help`
+
+        Explore the pods and find a secret in one of them.
     hints:
         hint1:
             points: 2
@@ -58,13 +74,14 @@ task2:
                 oc rsh centos7-fixit-pod-3
 
 task3:
-    name: Get the food
+    name: Get the Food
     description: |
-        You are hungry.
-        You start to roll around your cave in search for something eatable.
+        You are hungry. It's lunch time already and you didn't have breakfast!
+        You start to search for something eatable in your place.
         This place is empty. So you need to order some.
-        On your fridge you see a note
-        "The food is there: https://github.com/lina-nikiforova/fixit/raw/master/food/yummy"
+        On your fridge you see a note "The food is there: https://github.com/lina-nikiforova/fixit/raw/master/food/yummy"
+
+        Get the food from the provided location. You don't need to do anything with it yet, just get it.
     hints:
         hint1:
             points: 2
@@ -74,10 +91,10 @@ task3:
             description: You can use curl or wget to get the files
         hint3:
             points: 10
-            description: curl -Ok  https://raw.githubusercontent.com/lina-nikiforova/fixit/master/food/yummy
+            description: wget https://github.com/lina-nikiforova/fixit/raw/master/food/yummy
 
 task4:
-    name: Open the food
+    name: Open the Food
     description: |
         The food is delivered and smells so good!
         Open it!
@@ -94,12 +111,14 @@ task4:
             description: unzip yummy
 
 task5:
-    name: Run away!
+    name: Run Away!
     description: |
-        The ghosts are back!
+        You see 4 ghosts are coming to you!
         Damn, you just woke up and need to fight for your food?
+        Blinky, Pinky, Inky, Clyde... Wow! How do you know their names?
         Luckily, there's a special magic script that was inside your yummy food to help you out and
         check there're no ghosts around.
+
         Run "pytest script.py" and get all the tests passed to run away from the ghosts.
     hints:
         hint1:
