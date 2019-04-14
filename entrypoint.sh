@@ -16,6 +16,7 @@ fi
 
 export PYTHONIOENCODING=utf8
 source /home/contest/fixit/.contest_venv/bin/activate
+source /home/contest/.bashrc
 
 # Login to Openshift cluster
 oc login ${OC_URL} --token=${OC_TOKEN}
