@@ -1,6 +1,7 @@
 #!.contest_venv/bin/python
 import datetime
 import os
+import sys
 
 from consolemenu import *
 from consolemenu.format import *
@@ -16,7 +17,8 @@ def yamls():
     yaml = ruamel.yaml.YAML()
     yaml.indent(sequence=4, offset=2)
     input_file = "./tasks_definition.yaml"
-    with open(input_file, 'r') as f:
+    filename1 = os.path.join(os.path.dirname(sys.executable), input_file)
+    with open(filename1, 'r') as f:
         data = f.read()
     x = yaml.load(data)
     return x
@@ -25,7 +27,8 @@ def yamls():
 def use_hint(deduction, hint):
     global filename
     if os.path.isfile(filename):
-        with open(filename, 'r+') as f:
+        filename2 = os.path.join(os.path.dirname(sys.executable), filename)
+        with open(filename2, 'r+') as f:
             score = f.read()
             new_score = int(score) - deduction
             f.seek(0)
@@ -48,14 +51,16 @@ def get_name_email():
     global filename
     filename = '/home/contest/fixit/volume/{}_{}_{}'.format(username, email, current_time)
     total_points = str(data['total_points'])
-    with open(filename, 'w') as f:
+    filename3 = os.path.join(os.path.dirname(sys.executable), filename)
+    with open(filename3, 'w') as f:
         f.write(total_points)
 
 
 def get_current_score():
     global filename
     if os.path.isfile(filename):
-        with open(filename) as f:
+        filename4 = os.path.join(os.path.dirname(sys.executable), filename)
+        with open(filename4) as f:
             score = f.read()
         Screen().input('Your score is {}'.format(score))
     else:

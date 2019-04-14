@@ -6,8 +6,8 @@ Example:
 docker run -e OC_URL=https://api.starter-us-east-1.openshift.com \
   -e OC_TOKEN=qNmldCM_YHr3FDmjliuhzmyadGE30kTpQq12121 \
   -e OC_PROJECT=fixit{1..6} \
+  -v `pwd`:/home/contest/volume \
   -it anikiforova/fixit
-
 
 
 
