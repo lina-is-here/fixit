@@ -20,6 +20,12 @@ source /home/contest/.bashrc
 
 # Login to Openshift cluster
 oc login ${OC_URL} --token=${OC_TOKEN}
+
+if [ $? -ne 0 ];then
+  echo "oc login command most probably failed..."
+  exit 1
+fi
+
 # Switch to project
 oc project ${OC_PROJECT}
 
