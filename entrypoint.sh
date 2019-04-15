@@ -31,7 +31,7 @@ oc project ${OC_PROJECT}
 
 # Delete pods if they exist
 PODS=`oc get pods 2>&1 `
-if [ $(echo $PODS | grep "No resources"; echo $?) -ne 0  ];then
+if [ $(echo $PODS | grep -q "No resources"; echo $?) -ne 0  ];then
   oc delete -f ./centos_pods.yml
 fi
 
