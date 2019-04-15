@@ -20,12 +20,18 @@ source /home/contest/.bashrc
 
 # Login to Openshift cluster
 oc login ${OC_URL} --token=${OC_TOKEN}
+
+if [ $? -ne 0 ];then
+  echo "oc login command most probably failed..."
+  exit 1
+fi
+
 # Switch to project
 oc project ${OC_PROJECT}
 
 # Delete pods if they exist
 PODS=`oc get pods 2>&1 `
-if [ $(echo $PODS | grep "No resources"; echo $?) -ne 0  ];then
+if [ $(echo $PODS | grep -q "No resources"; echo $?) -ne 0  ];then
   oc delete -f ./centos_pods.yml
 fi
 
