@@ -51,6 +51,8 @@ RUN oc completion bash >> /etc/bash_completion.d/oc_completion && \
 # chmod 700 /home/contest/fixit-base && chown root:root /home/contest/fixit-base
 
 USER contest
+RUN ln -s /home/contest/fixit-base/contest /home/contest/fixit/contest && \
+    cp /home/contest/fixit-base/centos_pods.yml /home/contest/fixit/
 
 VOLUME /home/contest/volume
 
