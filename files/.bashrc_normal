@@ -5,10 +5,12 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+if [ -f /home/contest/.bashrc ]; then
+  . /home/contest/.bashrc
+fi
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-export TTT=1
 alias pytest='/usr/local/bin/detect_passed'
-source /home/contest/fixit/.contest_venv/bin/activate
