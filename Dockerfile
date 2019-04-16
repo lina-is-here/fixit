@@ -38,15 +38,12 @@ RUN source .contest_venv/bin/activate && \
     pip install pyinstaller pacman-game \
     && pyinstaller ../fixit-base/contest && ls -ltr && ls -ltr dist/
 
-RUN echo 'source /home/contest/fixit/.contest_venv/bin/activate' >> ~/.bashrc && \
-    echo 'alias pytest='/usr/local/bin/detect_passed >> ~/.bashrc
-
 ADD .tmux.conf /home/contest/
 ADD entrypoint.sh /usr/local/bin
 
-
 USER root
 RUN oc completion bash >> /etc/bash_completion.d/oc_completion && \
+    echo 'source /home/contest/fixit/.contest_venv/bin/activate' >> ~/.bashrc && \
     cat /home/contest/fixit-base/bash_oc_function >> /home/contest/.bashrc
 
 # chmod 700 /home/contest/fixit-base && chown root:root /home/contest/fixit-base
