@@ -38,7 +38,8 @@ RUN source .contest_venv/bin/activate && \
     pip install pyinstaller pacman-game \
     && pyinstaller ../fixit-base/contest && ls -ltr && ls -ltr dist/
 
-RUN echo 'source /home/contest/fixit/.contest_venv/bin/activate' >> ~/.bashrc
+RUN echo 'source /home/contest/fixit/.contest_venv/bin/activate' >> ~/.bashrc && \
+    echo 'alias pytest='/usr/local/bin/detect_passed >> ~/.bashrc
 
 ADD .tmux.conf /home/contest/
 ADD entrypoint.sh /usr/local/bin
