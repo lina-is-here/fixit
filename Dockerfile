@@ -52,7 +52,8 @@ RUN oc completion bash >> /etc/bash_completion.d/oc_completion && \
 
 USER contest
 RUN ln -s /home/contest/fixit-base/contest /home/contest/fixit/contest && \
-    cp /home/contest/fixit-base/centos_pods.yml /home/contest/fixit/
+    cp /home/contest/fixit-base/centos_pods.yml /home/contest/fixit/ && \
+    cp -pr /home/contest/fixit-base/files /home/contest/fixit/
 
 VOLUME /home/contest/volume
 
